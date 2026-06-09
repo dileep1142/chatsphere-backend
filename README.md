@@ -1,177 +1,116 @@
-# ChatSphere - Real-Time Chat Application
+# ChatSphere Backend
 
-## Overview
-
-ChatSphere is a full-stack real-time chat application built using React.js, Spring Boot, MySQL, JWT Authentication, and WebSocket (STOMP).
-
-Users can register, login securely, create chat rooms, send messages in real time, and view chat history across multiple devices.
-
----
+A Spring Boot based backend for a real-time chat application featuring JWT authentication, room management, WebSocket communication, and MySQL database integration.
 
 ## Features
 
-### Authentication
-
 * User Registration
 * User Login
-* JWT Token Authentication
-* Protected Routes
-
-### Chat Rooms
-
-* Create New Rooms
-* View Available Rooms
-* Join Rooms
-
-### Real-Time Messaging
-
+* JWT Authentication
+* Secure REST APIs
+* Create Chat Rooms
+* Retrieve Messages
+* Real-Time Chat
+* Typing Indicators
+* MySQL Database Integration
 * WebSocket Communication
-* STOMP Protocol
-* Instant Message Delivery
-* Typing Indicator
-
-### Message Management
-
-* Message Persistence
-* Chat History
-* Sender Information
-* Timestamp Support
-
-### Responsive Design
-
-* Mobile Friendly UI
-* Tablet Support
-* Desktop Support
-
----
 
 ## Tech Stack
 
-### Frontend
-
-* React.js
-* React Router DOM
-* Axios
-* STOMP.js
-* SockJS
-* CSS3
-
-### Backend
-
+* Java 17
 * Spring Boot
 * Spring Security
 * Spring Data JPA
-* JWT Authentication
-* Spring WebSocket
-
-### Database
-
 * MySQL
-
-### Build Tools
-
+* JWT
+* WebSocket
+* STOMP
+* SockJS
 * Maven
-* Vite
 
----
+## Architecture
 
-## Project Structure
+Frontend (React.js)
+|
+REST APIs + JWT
+|
+Spring Boot Backend
+|
+MySQL Database
 
-Backend
+Real-Time Communication:
+React → WebSocket → Spring Boot → WebSocket → React
 
-chat-sphere/
+## API Endpoints
 
-* controller
-* service
-* repository
-* model
-* dto
-* security
-* config
+Authentication
 
-Frontend
+POST /api/auth/register
+POST /api/auth/login
 
-chat-sphere-frontend/
+Rooms
 
-* components
-* pages
-* services
-* context
-* assets
+GET /api/rooms
+POST /api/rooms
 
----
+Messages
 
-## Screenshots
+GET /api/messages/room/{roomId}
+POST /api/messages
 
-### Login Page
+WebSocket
 
-(Add Screenshot)
+/ws
+/app/chat.send
+/app/chat.typing
+/topic/room/{roomId}
+/topic/typing/{roomId}
 
-### Register Page
+## Configuration
 
-(Add Screenshot)
+application.properties
 
-### Chat Room
+spring.application.name=chat-sphere
 
-(Add Screenshot)
+server.port=${PORT:8080}
 
-### Mobile View
+spring.datasource.url=${DATABASE_URL:jdbc:mysql://localhost:3306/chatsphere}
+spring.datasource.username=${DATABASE_USERNAME:root}
+spring.datasource.password=${DATABASE_PASSWORD:your_password}
 
-(Add Screenshot)
+jwt.secret=${JWT_SECRET:your_secret_key}
 
----
+## Run Locally
 
-## Installation
+1. Clone repository
 
-### Backend
+git clone https://github.com/dileep1142/chatsphere-backend.git
 
-```bash
-cd chat-sphere
+2. Configure MySQL
+
+Create database:
+
+CREATE DATABASE chatsphere;
+
+3. Run application
+
 ./mvnw spring-boot:run
-```
 
-Backend runs on:
+## Database Tables
 
-```text
-http://localhost:8080
-```
-
-### Frontend
-
-```bash
-cd chat-sphere-frontend
-npm install
-npm run dev
-```
-
-Frontend runs on:
-
-```text
-http://localhost:5173
-```
-
----
+* users
+* rooms
+* messages
 
 ## Future Enhancements
 
-* Emoji Support
+* Online/Offline Status
+* Message Read Receipts
 * File Sharing
-* Online User Status
-* Group Management
+* User Profiles
+* Group Administration
 * Message Reactions
-* Read Receipts
-
----
 
 ## Author
 
-Mallela Dileep Kumar
-
-GitHub:
-https://github.com/dileep1142
-
-LinkedIn:
-https://www.linkedin.com/in/dileep-kumar-mallela-28b9852a7/
----
-
-Built with React.js, Spring Boot, MySQL, JWT, and WebSocket.
+Dileep Kumar Mallela
